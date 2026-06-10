@@ -1,0 +1,289 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Estúdio Friedlander — Gerador de Padrões Contínuos</title>
+
+  <!-- Google Fonts for Premium Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap"
+    rel="stylesheet">
+
+  <!-- CSS Modules -->
+  <link rel="stylesheet" href="css/variaveis.css" />
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/layout.css" />
+  <link rel="stylesheet" href="css/componentes.css" />
+  <link rel="stylesheet" href="css/impressao.css" />
+</head>
+
+<body>
+  <main class="container">
+
+    <!-- Studio Header Section (Compact horizontal toolbar with Colors) -->
+    <section class="intro">
+      <div class="brand">
+        <h1> Estúdio Friedlander</h1>
+      </div>
+
+      <!-- Horizontal Colors Toolbar -->
+      <div class="header-colors">
+        <!-- Active Color Targets previews (circular previews) -->
+        <div class="palette-dropdown-group">
+          <span class="top-bar-label">Cores</span>
+          <div class="color-targets">
+            <div class="color-target-item active" id="target-brush"
+              title="Alterar Cor do Pincel (Clique na amostra abaixo ou no círculo para abrir o seletor)">
+              <div class="target-circle" id="brush-color-preview" style="background-color: #1E1E1E;"></div>
+              <span class="target-label">Pincel</span>
+            </div>
+            <div class="color-target-item" id="target-bg"
+              title="Alterar Cor de Fundo (Clique na amostra abaixo ou no círculo para abrir o seletor)">
+              <div class="target-circle" id="bg-color-preview" style="background-color: #F1E8DE;"></div>
+              <span class="target-label">Fundo</span>
+            </div>
+          </div>
+          <!-- Hidden color inputs -->
+          <input id="color" type="color" value="#1E1E1E" style="display: none;" />
+          <input id="bg-color" type="color" value="#F1E8DE" style="display: none;" />
+        </div>
+
+        <div class="divider-v"></div>
+
+        <!-- Palette Selector Dropdown -->
+        <div class="palette-dropdown-group">
+          <span class="top-bar-label">Paletas</span>
+          <select id="palette-select" class="palette-select-compact">
+            <option value="atelier">Atelier Quente</option>
+            <option value="forest">Névoa da Floresta</option>
+            <option value="ocean">Oceano Profundo</option>
+            <option value="minimalist">Cinza Minimalista</option>
+          </select>
+        </div>
+
+        <div class="divider-v"></div>
+
+        <!-- Palette Swatches Row (rounded squares swatches) -->
+        <div class="swatches-row-group">
+          <span class="top-bar-label">Amostras</span>
+          <div id="palette-swatches" class="swatches-horizontal-row">
+            <!-- Instantiated dynamically inside events.js -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Main Workspace Layout (Full Height Fit) -->
+    <section class="layout">
+
+      <!-- Column 1: Sidebar controls -->
+      <aside class="panel controls-sidebar">
+
+        <!-- Drawing Tools System -->
+        <div class="control-group">
+          <div class="control-label">Ferramentas de Desenho</div>
+          <div class="tool-grid">
+            <button type="button" class="btn-tool active" data-tool="free" title="Lápis Livre">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round">
+                <path d="M12 20h9M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z" />
+              </svg>
+              <span>Lápis</span>
+            </button>
+            <button type="button" class="btn-tool" data-tool="line" title="Linha Reta">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round">
+                <line x1="5" y1="19" x2="19" y2="5" />
+              </svg>
+              <span>Linha</span>
+            </button>
+            <button type="button" class="btn-tool" data-tool="rectangle" title="Retângulo">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round">
+                <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
+              </svg>
+              <span>Retângulo</span>
+            </button>
+            <button type="button" class="btn-tool" data-tool="triangle" title="Triângulo">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round">
+                <polygon points="12,3 2,21 22,21" />
+              </svg>
+              <span>Triângulo</span>
+            </button>
+            <button type="button" class="btn-tool" data-tool="circle" title="Círculo">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10" />
+              </svg>
+              <span>Círculo</span>
+            </button>
+            <button type="button" class="btn-tool active" id="grid-guides-toggle" title="Alternar Grade">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round">
+                <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
+                <line x1="9" y1="3" x2="9" y2="21" />
+                <line x1="15" y1="3" x2="15" y2="21" />
+                <line x1="3" y1="9" x2="21" y2="9" />
+                <line x1="3" y1="15" x2="21" y2="15" />
+              </svg>
+              <span>Guia Grade</span>
+            </button>
+          </div>
+
+          <!-- Brush Settings Container (Brush Thickness Slider + Toggles + Clear) -->
+          <div class="brush-settings-container">
+            <div class="control-row">
+              <label for="thickness" class="control-label" style="margin:0;">Tamanho do Pincel</label>
+              <span id="thickness-value" class="slider-val">6px</span>
+            </div>
+            <input id="thickness" type="range" min="1" max="40" value="6" />
+
+            <div class="toggles-row">
+              <div class="toggle-item" style="flex: 1; width: 100%;">
+                <span class="toggle-label-text">Modo Borracha</span>
+                <label class="switch">
+                  <input type="checkbox" id="eraser-toggle" />
+                  <span class="slider-switch"></span>
+                </label>
+              </div>
+            </div>
+
+            <button id="btn-clear" type="button" class="secondary" style="width: 100%;">Limpar Quadro</button>
+          </div>
+        </div>
+
+        <!-- History Action Buttons -->
+        <div class="control-group">
+          <div class="control-label">Histórico</div>
+          <div class="actions-row">
+            <button id="btn-undo" type="button" class="secondary" title="Desfazer traço" disabled>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 7v6h6M21 17a9 9 0 0 0-9-9 9 9 0 0 0-6 2.3L3 13" />
+              </svg>
+              Desfazer
+            </button>
+            <button id="btn-redo" type="button" class="secondary" title="Refazer traço" disabled>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 7v6h-6M3 17a9 9 0 0 1 9-9 9 9 0 0 1 6 2.3l3 2.7" />
+              </svg>
+              Refazer
+            </button>
+          </div>
+        </div>
+
+        <!-- Export / Clear / Print functions -->
+        <div class="control-group">
+          <div class="control-label">Exportar e Configurações</div>
+
+          <!-- Pattern Density repeats selector -->
+          <div class="control-group" style="margin-bottom: 6px;">
+            <div class="control-row">
+              <label for="pattern-density" class="control-label" style="margin:0;">Repetições</label>
+              <span id="pattern-density-value" class="slider-val">3x</span>
+            </div>
+            <input id="pattern-density" type="range" min="1" max="6" step="0.5" value="3" />
+          </div>
+
+          <!-- Export Size -->
+          <div class="control-group" style="margin-bottom: 6px;">
+            <label for="export-resolution" class="control-label">Tamanho de Exportação</label>
+            <select id="export-resolution" class="palette-select-compact" style="width: 100%; height: 32px;">
+              <option value="4K">4K Ultra HD (3840 x 2160)</option>
+              <option value="8K">8K Ultra HD (7680 x 4320)</option>
+              <option value="1080p">Full HD (1920 x 1080)</option>
+            </select>
+          </div>
+
+          <!-- Utilities Actions -->
+          <div class="control-group" style="gap: 8px; margin-top: 4px; width: 100%;">
+            <button id="btn-open-preview" type="button" style="width: 100%;">Visualizar Padrão</button>
+            <div class="actions-row" style="width: 100%;">
+              <button id="btn-export" type="button" style="flex: 1.3;">Exportar Padrão</button>
+              <button id="btn-print" type="button" class="secondary" style="flex: 1;">Imprimir</button>
+            </div>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Column 2: Quadro de Desenho (Espaço de trabalho independente) -->
+      <article class="panel panel-drawing">
+        <h2>Quadro de Desenho</h2>
+        <div class="canvas-container show-grid">
+          <canvas id="canvas-drawing" width="405" height="495"></canvas>
+          <div class="grid-overlay"></div>
+        </div>
+      </article>
+
+      <!-- Column 3: Painel Sobre o Estúdio -->
+      <article class="panel panel-info">
+        <h2>Sobre o Estúdio</h2>
+        <div class="info-card-content">
+          <p>
+            O <strong>Estúdio Friedlander</strong> é um espaço criativo interativo desenvolvido como parte desta
+            exposição
+            dedicada à designer Elizabeth Friedlander.
+          </p>
+          <p>
+            Os visitantes podem se inspirar na exposição para criarem os seus próprios designs modulares e observar como
+            elementos individuais se combinam para formar composições repetidas maiores.
+          </p>
+
+          <div class="divider-h"></div>
+
+          <h3>Como Usar</h3>
+          <ul>
+            <li><strong>Selecione uma ferramenta</strong> (Lápis, Linha, Retângulo, Triângulo ou Círculo) e escolha a
+              cor do pincel na barra superior.</li>
+            <li><strong>Desenhe na tela</strong> para criar seu padrão unitário básico. Ative o <strong>Modo
+                Borracha</strong> para refinar seu design.</li>
+            <li>Use a <strong>Guia Grade</strong> para alinhar suas geometries perfeitamente.</li>
+            <li>Clique em <strong>Visualizar Padrão</strong> para inspecionar a repetição contínua em escala.</li>
+          </ul>
+
+          <div class="divider-h"></div>
+
+          <h3>Pronto para Produção</h3>
+          <p>
+            Prepare seu design para impressão selecionando a resolução desejada e clique em
+            <strong>Exportar Padrão</strong> para salvar um PNG contínuo de alta qualidade.
+          </p>
+        </div>
+      </article>
+
+    </section>
+  </main>
+
+  <!-- Modal Pattern Preview Viewer -->
+  <div id="preview-modal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>Visualização do Padrão — Friedlander</h2>
+        <button id="modal-close" class="btn-close" title="Fechar Visualização">&times;</button>
+      </div>
+      <div class="modal-body">
+        <canvas id="canvas-pattern" width="880" height="550"></canvas>
+      </div>
+      <div class="modal-footer">
+        <p class="hint">Visualização contínua lado a lado do seu módulo criativo.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Core Javascript Modules Namespace Load -->
+  <script src="Files_js/globals.js"></script>
+  <script src="Files_js/dom.js"></script>
+  <script src="Files_js/state.js"></script>
+  <script src="Files_js/pattern.js"></script>
+  <script src="Files_js/drawing.js"></script>
+  <script src="Files_js/events.js"></script>
+  <script src="Files_js/main.js"></script>
+</body>
+
+</html>

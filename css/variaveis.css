@@ -1,0 +1,19 @@
+ /* CSS VARIABLES (Custom Properties)
+  Defines the core color scheme, spacing tokens, and styling constants.*/
+
+ :root {
+   color-scheme: light;
+   --bg: #f9f6f0;
+   --paper: #ffffff;
+   --ink: #1c1a17;
+   --accent: #b85a38;
+   --accent-hover: #9e4a2b;
+   --accent-light: #f5e8e2;
+   --line: #e4ddd3;
+   --shadow: 0 12px 32px rgba(28, 26, 23, 0.06);
+   --shadow-sm: 0 4px 12px rgba(28, 26, 23, 0.04);
+   --radius-lg: 20px;
+   --radius-md: 12px;
+   --radius-sm: 6px;
+   --transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+ }

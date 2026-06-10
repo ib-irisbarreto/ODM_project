@@ -1,0 +1,46 @@
+ /* RESET AND BASE STYLES
+  Resets default browser properties and sets typography standards.*/
+
+ * {
+   box-sizing: border-box;
+ }
+
+ body {
+   margin: 0;
+   background:
+     linear-gradient(90deg, rgba(184, 90, 56, 0.03) 1px, transparent 1px),
+     linear-gradient(rgba(184, 90, 56, 0.03) 1px, transparent 1px),
+     var(--bg);
+   background-size: 24px 24px, 24px 24px, auto;
+   color: var(--ink);
+   font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+   line-height: 1.5;
+   -webkit-font-smoothing: antialiased;
+ }
+
+ h1 {
+   margin: 0 0 6px;
+   font-family: 'Playfair Display', Georgia, serif;
+   font-size: 2.4rem;
+   font-weight: 800;
+   letter-spacing: -0.01em;
+   color: var(--ink);
+ }
+
+ p {
+   margin: 0 0 18px;
+   color: #6a6258;
+   font-size: 1.05rem;
+ }
+
+ h2 {
+   font-size: 1.15rem;
+   font-weight: 700;
+   margin: 0 0 16px;
+   font-family: 'Playfair Display', Georgia, serif;
+   letter-spacing: 0.05em;
+   text-transform: uppercase;
+   color: var(--accent);
+   border-bottom: 2px solid var(--accent-light);
+   padding-bottom: 6px;
+ }

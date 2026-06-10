@@ -1,0 +1,67 @@
+/* 
+ * MAIN PAGE LAYOUT
+ * Sets the grid layout for the Pattern Studio.
+ */
+.container {
+  max-width: 100%;
+  height: 100vh;
+  margin: 0 auto;
+  padding: 16px 20px;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+.layout {
+  flex: 1;
+  display: grid;
+  gap: 20px;
+  grid-template-columns: 280px 1.6fr 1.1fr; /* Symmetrical sidebar, creative drawing board, and exhibition about panel */
+  align-items: stretch;
+  min-height: 0; /* Crucial for preventing grid item overflow */
+  margin-bottom: 4px;
+}
+
+.panel {
+  background: var(--paper);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow);
+  padding: 24px; /* Increased internal padding for panels */
+  display: flex;
+  flex-direction: column;
+  transition: var(--transition);
+  min-height: 0; /* Crucial for scrolling children */
+  overflow: hidden;
+}
+
+.panel:hover {
+  box-shadow: 0 10px 28px rgba(30, 30, 30, 0.05);
+}
+
+.panel-drawing {
+  justify-content: center;
+  align-items: center;
+}
+
+.panel-info {
+  display: flex;
+  flex-direction: column;
+}
+
+/* RESPONSIVE LAYOUT BREAKPOINTS */
+@media (max-width: 1200px) {
+  .layout {
+    grid-template-columns: 260px 1.4fr 1fr;
+    gap: 16px;
+  }
+}
+
+@media (max-width: 900px) {
+  .layout {
+    grid-template-columns: 240px 1fr;
+  }
+  .panel-info {
+    display: none; /* Hide info card on narrow viewports to focus on active drawing canvas */
+  }
+}

@@ -1,0 +1,28 @@
+ /* PRINT MODE
+  Hides the dashboard interface and scales the canvas for full page printing.*/
+
+ @media print {
+   body * {
+     visibility: hidden;
+   }
+
+   body {
+     background: none !important;
+   }
+
+   #canvas-pattern,
+   #canvas-pattern * {
+     visibility: visible;
+   }
+
+   #canvas-pattern {
+     position: absolute;
+     left: 0;
+     top: 0;
+     width: 100vw !important;
+     max-width: none !important;
+     height: auto !important;
+     border: none;
+     box-shadow: none;
+   }
+ }
