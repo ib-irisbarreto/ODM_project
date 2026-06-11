@@ -21,24 +21,6 @@ window.App.Events = {
                 { name: 'Sálvia e Creme', colors: ['#8FA895', '#F1E8DE'] },
                 { name: 'Floresta Profunda', colors: ['#223326', '#F1E8DE'] }
             ]
-        },
-        ocean: {
-            solids: ['#1F3C4D', '#325D79', '#88A0A8', '#E2D3BB'],
-            gradients: [
-                { name: 'Profundezas do Oceano', colors: ['#1F3C4D', '#325D79'] },
-                { name: 'Maré Azul-petróleo', colors: ['#325D79', '#88A0A8'] },
-                { name: 'Mar e Areia', colors: ['#88A0A8', '#E2D3BB'] },
-                { name: 'Surfe da Meia-noite', colors: ['#1F3C4D', '#E2D3BB'] }
-            ]
-        },
-        minimalist: {
-            solids: ['#111111', '#555555', '#999999', '#CCCCCC'],
-            gradients: [
-                { name: 'Transição de Grafite', colors: ['#111111', '#555555'] },
-                { name: 'Cinza Midtown', colors: ['#555555', '#999999'] },
-                { name: 'Cinza Ardósia Prateado', colors: ['#999999', '#CCCCCC'] },
-                { name: 'Monocromático', colors: ['#111111', '#CCCCCC'] }
-            ]
         }
     },
 
