@@ -46,66 +46,6 @@ window.App.Drawing = {
         };
     },
 
-    // Snaps coordinate point to the nearest 9x11 grid cell boundary lines
-    snapToGrid: function(point) {
-        const state = window.App.State;
-        if (!state.snapToGrid) return point;
-
-        // Obtain pixel-per-mm density scale measured at startup
-        const pxPerMm = state.pixelsPerMm || 3.78;
-        const marginDisplay = 5 * pxPerMm;
-        const gutterDisplay = 5 * pxPerMm;
-
-        const canvas = window.App.DOM.drawingCanvas;
-        const scale = state.qualityScale;
-
-        // Convert display scale measurements to internal canvas coordinates
-        const marginInt = marginDisplay * scale;
-        const gutterInt = gutterDisplay * scale;
-
-        const colWidthInt = (canvas.width - 2 * marginInt - 8 * gutterInt) / 9;
-        const rowHeightInt = (canvas.height - 2 * marginInt - 10 * gutterInt) / 11;
-
-        // Collect grid border snapping coordinates
-        const xLines = [0, canvas.width];
-        for (let i = 0; i < 9; i++) {
-            const left = marginInt + i * (colWidthInt + gutterInt);
-            const right = left + colWidthInt;
-            xLines.push(left, right);
-        }
-
-        const yLines = [0, canvas.height];
-        for (let j = 0; j < 11; j++) {
-            const top = marginInt + j * (rowHeightInt + gutterInt);
-            const bottom = top + rowHeightInt;
-            yLines.push(top, bottom);
-        }
-
-        // Apply snapping threshold of 14 display pixels
-        const threshold = 14 * scale;
-        let snappedX = point.x;
-        let snappedY = point.y;
-
-        let minDiffX = Infinity;
-        for (const x of xLines) {
-            const diff = Math.abs(point.x - x);
-            if (diff < minDiffX && diff < threshold) {
-                minDiffX = diff;
-                snappedX = x;
-            }
-        }
-
-        let minDiffY = Infinity;
-        for (const y of yLines) {
-            const diff = Math.abs(point.y - y);
-            if (diff < minDiffY && diff < threshold) {
-                minDiffY = diff;
-                snappedY = y;
-            }
-        }
-
-        return { x: snappedX, y: snappedY };
-    },
 
     // Draws a freehand stroke between two points.
     drawLine: function(start, end, pressure = 0.5) {

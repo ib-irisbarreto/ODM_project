@@ -37,12 +37,12 @@
           <span class="top-bar-label">Cores</span>
           <div class="color-targets">
             <div class="color-target-item active" id="target-brush"
-              title="Alterar Cor do Pincel (Clique na amostra abaixo ou no círculo para abrir o seletor)">
+              title="Alterar Cor do Pincel (Selecione uma amostra de cor ou gradiente na barra ao lado)">
               <div class="target-circle" id="brush-color-preview" style="background-color: #1E1E1E;"></div>
               <span class="target-label">Pincel</span>
             </div>
             <div class="color-target-item" id="target-bg"
-              title="Alterar Cor de Fundo (Clique na amostra abaixo ou no círculo para abrir o seletor)">
+              title="Alterar Cor de Fundo (Selecione uma amostra de cor ou gradiente na barra ao lado)">
               <div class="target-circle" id="bg-color-preview" style="background-color: #F1E8DE;"></div>
               <span class="target-label">Fundo</span>
             </div>
@@ -129,7 +129,7 @@
                 <line x1="3" y1="9" x2="21" y2="9" />
                 <line x1="3" y1="15" x2="21" y2="15" />
               </svg>
-              <span>Guia Grade</span>
+              <span>Grade Guia</span>
             </button>
           </div>
 
@@ -230,7 +230,7 @@
           </p>
           <p>
             Os visitantes podem se inspirar na exposição para criarem os seus próprios designs modulares e observar como
-            elementos individuais se combinam para formar composições repetidas maiores.
+            elementos individuais se combinam para formar padrões.
           </p>
 
           <div class="divider-h"></div>
@@ -241,16 +241,16 @@
               cor do pincel na barra superior.</li>
             <li><strong>Desenhe na tela</strong> para criar seu padrão unitário básico. Ative o <strong>Modo
                 Borracha</strong> para refinar seu design.</li>
-            <li>Use a <strong>Guia Grade</strong> para alinhar suas geometries perfeitamente.</li>
-            <li>Clique em <strong>Visualizar Padrão</strong> para inspecionar a repetição contínua em escala.</li>
+            <li>Use a <strong>Grade Guia</strong> para alinhar suas geometrias.</li>
+            <li>Clique em <strong>Visualizar Padrão</strong> para visualizar a repetição do padrão criado.</li>
           </ul>
 
           <div class="divider-h"></div>
 
           <h3>Pronto para Produção</h3>
           <p>
-            Prepare seu design para impressão selecionando a resolução desejada e clique em
-            <strong>Exportar Padrão</strong> para salvar um PNG contínuo de alta qualidade.
+            Prepare seu design para impressão ao clicar em <strong>Imprimir</strong> ou selecione a resolução desejada e clique em
+            <strong>Exportar Padrão</strong> para salvar em formato PNG.
           </p>
         </div>
       </article>
@@ -268,9 +268,16 @@
       <div class="modal-body">
         <canvas id="canvas-pattern" width="880" height="550"></canvas>
       </div>
-      <div class="modal-footer">
-        <p class="hint">Visualização contínua lado a lado do seu módulo criativo.</p>
-      </div>
+    </div>
+  </div>
+
+  <!-- Print area for 2-page flyer printing -->
+  <div id="print-area">
+    <div class="print-page page-1">
+      <canvas id="canvas-print-page1" width="1170" height="2481"></canvas>
+    </div>
+    <div class="print-page page-2">
+      <img id="img-print-page2" src="assets/Folhetos-02.png" alt="Folheto Verso" />
     </div>
   </div>
 

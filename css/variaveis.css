@@ -16,4 +16,28 @@
    --radius-md: 12px;
    --radius-sm: 6px;
    --transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+
+   /* TYPOGRAPHY SCHEME */
+   --font-family-heading: 'Playfair Display', Georgia, serif;
+   --font-family-body: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+   --font-family-special: 'ElizabethND-Regular', var(--font-family-body);
+
+   /* Font Sizes */
+   --font-size-h1: 2.4rem;
+   --font-size-h2: 1.15rem;
+   --font-size-h3: 1.1rem;
+   --font-size-h4: 0.78rem;
+   --font-size-body: 1.05rem;
+   --font-size-brand: 1.55rem;
+   --font-size-btn: 0.82rem;
+   --font-size-btn-tool: 0.78rem;
+   --font-size-label: 0.75rem;
+   --font-size-label-small: 0.65rem;
+   --font-size-swatch-label: 0.72rem;
+   --font-size-close: 2rem;
+
+   /* Info Panel Typography Sizes (Can be increased/decreased independently) */
+   --font-size-info-h2: 1.4rem;
+   --font-size-info-h3: 1.3rem;
+   --font-size-info-body: 1.1rem;
  }

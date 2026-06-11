@@ -1,6 +1,11 @@
  /* RESET AND BASE STYLES
   Resets default browser properties and sets typography standards.*/
 
+ @font-face {
+    font-family: 'ElizabethND-Regular';
+    src: url('../fonts/ElizabethND-Regular.otf') format('opentype')
+  }
+
  * {
    box-sizing: border-box;
  }
@@ -13,15 +18,15 @@
      var(--bg);
    background-size: 24px 24px, 24px 24px, auto;
    color: var(--ink);
-   font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+   font-family: var(--font-family-body);
    line-height: 1.5;
    -webkit-font-smoothing: antialiased;
  }
 
  h1 {
    margin: 0 0 6px;
-   font-family: 'Playfair Display', Georgia, serif;
-   font-size: 2.4rem;
+   font-family: var(--font-family-heading);
+   font-size: var(--font-size-h1);
    font-weight: 800;
    letter-spacing: -0.01em;
    color: var(--ink);
@@ -30,14 +35,14 @@
  p {
    margin: 0 0 18px;
    color: #6a6258;
-   font-size: 1.05rem;
+   font-size: var(--font-size-body);
  }
 
  h2 {
-   font-size: 1.15rem;
+   font-size: var(--font-size-h2);
    font-weight: 700;
    margin: 0 0 16px;
-   font-family: 'Playfair Display', Georgia, serif;
+   font-family: var(--font-family-heading);
    letter-spacing: 0.05em;
    text-transform: uppercase;
    color: var(--accent);

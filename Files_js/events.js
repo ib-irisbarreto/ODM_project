@@ -24,23 +24,25 @@ window.App.Events = {
         }
     },
 
-    setup: function() {
+    setup: function () {
         const dom = window.App.DOM;
         const drawing = window.App.Drawing;
         const state = window.App.State;
         const pattern = window.App.Pattern;
 
-        // CALIBRATE PIXELS PER MILLIMETER ON STARTUP
-        const calibratePixelsPerMm = () => {
-            const div = document.createElement('div');
-            div.style.width = '1mm';
-            div.style.display = 'block';
-            document.body.appendChild(div);
-            const px = div.getBoundingClientRect().width;
-            document.body.removeChild(div);
-            state.pixelsPerMm = px || 3.78;
+        // Preload printing flyer assets
+        window.App.Assets = {
+            folheto01: null,
+            folheto01Loaded: false,
+            load: function () {
+                this.folheto01 = new Image();
+                this.folheto01.src = 'assets/Folhetos-01.png';
+                this.folheto01.onload = () => {
+                    this.folheto01Loaded = true;
+                };
+            }
         };
-        calibratePixelsPerMm();
+        window.App.Assets.load();
 
         // GENERATE 9x11 GRID CELL ELEMENTS DYNAMICALLY
         const generateGridOverlay = () => {
@@ -224,7 +226,31 @@ window.App.Events = {
 
         // PRINT BUTTON
         dom.printBtn.addEventListener('click', () => {
-            window.print();
+            if (!window.App.Assets.folheto01Loaded) {
+                const btnText = dom.printBtn.textContent;
+                dom.printBtn.textContent = 'Carregando...';
+                dom.printBtn.disabled = true;
+
+                const img = new Image();
+                img.src = 'assets/Folhetos-01.png';
+                img.onload = () => {
+                    window.App.Assets.folheto01 = img;
+                    window.App.Assets.folheto01Loaded = true;
+                    dom.printBtn.textContent = btnText;
+                    dom.printBtn.disabled = false;
+
+                    pattern.renderPrintCanvas();
+                    window.print();
+                };
+                img.onerror = () => {
+                    alert('Erro ao carregar o folheto para impressão.');
+                    dom.printBtn.textContent = btnText;
+                    dom.printBtn.disabled = false;
+                };
+            } else {
+                pattern.renderPrintCanvas();
+                window.print();
+            }
         });
 
         // EXPORT BUTTON
@@ -258,7 +284,7 @@ window.App.Events = {
             dom.gridGuidesToggle.addEventListener('click', () => {
                 state.showGrid = !state.showGrid;
                 const container = dom.drawingCanvas.parentElement;
-                
+
                 if (state.showGrid) {
                     container.classList.add('show-grid');
                     dom.gridGuidesToggle.classList.add('active');

@@ -1,28 +1,60 @@
- /* PRINT MODE
-  Hides the dashboard interface and scales the canvas for full page printing.*/
+/* PRINT MODE
+   Hides the dashboard interface and formats pages for a 110x220mm flyer (Envelope DL). */
 
- @media print {
-   body * {
-     visibility: hidden;
-   }
+#print-area {
+  display: none;
+}
 
-   body {
-     background: none !important;
-   }
+@media print {
+  @page {
+    size: 110mm 220mm;
+    margin: 0;
+  }
 
-   #canvas-pattern,
-   #canvas-pattern * {
-     visibility: visible;
-   }
+  /* Hide all elements on body except print-area */
+  body > *:not(#print-area) {
+    display: none !important;
+  }
 
-   #canvas-pattern {
-     position: absolute;
-     left: 0;
-     top: 0;
-     width: 100vw !important;
-     max-width: none !important;
-     height: auto !important;
-     border: none;
-     box-shadow: none;
-   }
- }
+  body {
+    background: none !important;
+  }
+
+  #print-area {
+    display: block !important;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 110mm;
+    height: 440mm; /* 2 pages of 220mm */
+  }
+
+  .print-page {
+    width: 110mm;
+    height: 220mm;
+    page-break-after: always;
+    position: relative;
+    overflow: hidden;
+    box-sizing: border-box;
+  }
+
+  .print-page:last-child {
+    page-break-after: avoid;
+  }
+
+  .print-page img,
+  .print-page canvas {
+    width: 110mm !important;
+    height: 220mm !important;
+    display: block !important;
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    border: none !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    object-fit: fill !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+}

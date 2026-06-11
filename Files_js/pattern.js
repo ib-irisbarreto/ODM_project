@@ -12,6 +12,18 @@ window.App.Contexts.export = exportCtx;
 
 window.App.Pattern = {
 
+    // Helper to resolve either a solid hex string or gradient background object to a canvas fillStyle
+    resolveBgStyle: function (context, width, height) {
+        const state = window.App.State;
+        if (typeof state.bgColor === 'object' && state.bgColor.colors) {
+            const grad = context.createLinearGradient(0, 0, width, height);
+            grad.addColorStop(0, state.bgColor.colors[0]);
+            grad.addColorStop(1, state.bgColor.colors[1]);
+            return grad;
+        }
+        return state.bgColor;
+    },
+
     // Fills a target 2D context canvas with the repeated pattern.
     //Customizes backgrounds, scales, and densities dynamically.
 
@@ -22,8 +34,8 @@ window.App.Pattern = {
         // Clear canvas context
         context.clearRect(0, 0, canvasWidth, canvasHeight);
 
-        // Fill solid background color
-        context.fillStyle = state.bgColor;
+        // Fill solid/gradient background color
+        context.fillStyle = this.resolveBgStyle(context, canvasWidth, canvasHeight);
         context.fillRect(0, 0, canvasWidth, canvasHeight);
 
         // Create repeat pattern from the drawing canvas
@@ -66,5 +78,46 @@ window.App.Pattern = {
         contexts.export.imageSmoothingQuality = 'high';
 
         this.fill(contexts.export, dom.exportCanvas.width, dom.exportCanvas.height, true);
+    },
+
+    // Renders the repeating pattern onto the high-resolution flyer print canvas
+    renderPrintCanvas: function () {
+        const state = window.App.State;
+        const dom = window.App.DOM;
+        const canvas = document.getElementById('canvas-print-page1');
+        if (!canvas) return;
+
+        const context = canvas.getContext('2d');
+        context.imageSmoothingEnabled = true;
+        context.imageSmoothingQuality = 'high';
+
+        // Clear canvas context
+        context.clearRect(0, 0, canvas.width, canvas.height);
+
+        // Fill solid/gradient background color
+        context.fillStyle = this.resolveBgStyle(context, canvas.width, canvas.height);
+        context.fillRect(0, 0, canvas.width, canvas.height);
+
+        // Create repeat pattern from the drawing canvas
+        const pattern = context.createPattern(dom.drawingCanvas, 'repeat');
+
+        if (pattern) {
+            const density = state.patternDensity || 3;
+            // Match the horizontal density exactly
+            const tileWidth = canvas.width / density;
+            const scaleAdjust = tileWidth / dom.drawingCanvas.width;
+
+            if (typeof DOMMatrix !== 'undefined') {
+                pattern.setTransform(new DOMMatrix().scale(scaleAdjust, scaleAdjust));
+            }
+
+            context.fillStyle = pattern;
+            context.fillRect(0, 0, canvas.width, canvas.height);
+        }
+
+        // Overlay the flyer image on top
+        if (window.App.Assets && window.App.Assets.folheto01) {
+            context.drawImage(window.App.Assets.folheto01, 0, 0, canvas.width, canvas.height);
+        }
     }
 };

@@ -13,8 +13,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const dpi = app.State.supersamplingFactor || 4;
 
     // Set internal resolution of canvases based on display size and supersampling factor (DPI)
-    app.DOM.drawingCanvas.width = 440 * dpi;
-    app.DOM.drawingCanvas.height = 440 * dpi;
+    app.DOM.drawingCanvas.width = 405 * dpi;
+    app.DOM.drawingCanvas.height = 495 * dpi;
 
     app.DOM.patternCanvas.width = 880 * dpi;
     app.DOM.patternCanvas.height = 550 * dpi;

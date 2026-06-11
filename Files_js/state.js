@@ -18,29 +18,8 @@ window.App.State = {
     bgColor: '#F1E8DE',      // Active background: can be hex string or gradient object
     activeColorTarget: 'brush', // Current selected target for palette swatches: 'brush' or 'bg'
     
-    brushPresets: {
-        solids: ['#1E1E1E', '#DA4914', '#E3CFB5', '#F1E8DE'],
-        gradients: [
-            { name: 'Tinta Vulcânica', colors: ['#1E1E1E', '#DA4914'] },
-            { name: 'Brilho do Pôr do Sol', colors: ['#DA4914', '#E3CFB5'] },
-            { name: 'Areia e Creme', colors: ['#E3CFB5', '#F1E8DE'] },
-            { name: 'Creme Noir', colors: ['#1E1E1E', '#F1E8DE'] }
-        ]
-    },
-    
-    bgPresets: {
-        solids: ['#ffffff', '#F1E8DE', '#E3CFB5', '#1E1E1E'],
-        gradients: [
-            { name: 'Gradiente Quente', colors: ['#F1E8DE', '#E3CFB5'] },
-            { name: 'Gradiente da Marca', colors: ['#DA4914', '#F1E8DE'] },
-            { name: 'Gradiente de Contraste', colors: ['#E3CFB5', '#1E1E1E'] },
-            { name: 'Explosão Vulcânica', colors: ['#1E1E1E', '#DA4914'] }
-        ]
-    },
-
     // CANVAS SETTINGS
     showGrid: true,          // Renders visual alignment grid lines on the drawing canvas
-    snapToGrid: false,       // Snap to grid is disabled (button removed from UI)
     supersamplingFactor: 4,  // High quality drawing factor
     patternDensity: 3,       // Number of repeats horizontally
 
